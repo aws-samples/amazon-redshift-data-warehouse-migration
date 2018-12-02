@@ -1,6 +1,6 @@
 ## Data Warehouse Migration to Amazon Redshift
 
-In few hours, quickly learn how to effectively migrate oracle data warehouse workload to Amazon Redshift using AWS Schema Conversion Tool (SCT) and SCT data extractors. The lab will help them to use advance features of SCT like Virtual Partition while migrating the data warehouse to Amazon Redshift.
+In few hours, quickly learn how to effectively migrate an existing oracle data warehouse workload to Amazon Redshift using AWS Schema Conversion Tool (SCT) and SCT data extractors.   In this session, we will demonstrate the detailed  approach and embrace some of the advance features and best practices around various AWS services like AWS Schema Conversion Tool (SCT) ,  SCT data extractors agents  and Amazon Redshift.   
 
 ## License Summary
 
