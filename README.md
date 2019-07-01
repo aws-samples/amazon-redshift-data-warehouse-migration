@@ -22,6 +22,8 @@ This workshop is broken into multiple labs. You must complete each Lab before pr
 
 1. [Lab 1 - Setting up the Lab](Lab-Part1.md)
 
+2. [Lab 2 - Running the Lab](Lab-Part2.md)
+
 
 ## License Summary
 
