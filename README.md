@@ -29,13 +29,28 @@ b. IAM Permissions – You need IAM permissions to create resources such as Amaz
 
 c.	AWS Limits - Ensure that you will not exceed the number of EC2 instances allowed by default in a given region (CloudFormation will create three EC2 instances). Ensure that you will not exceed number of VPCs allowed by default in a given region (CloudFormation will create one new VPC).
 
+# Verify the Source Data Warehouse before Migration
+
+For the purpose of this workshop, we have used an Amazon RDS for Oracle instance to host the Oracle Data Warehouse. In a real-life situation, this Oracle data warehouse could be on-premises, on Amazon EC2 or on Amazon RDS itself.
+
+Once the CloudFormation Stack is created, an Amazon RDS instance will be provisioned along with the proper security group, DB instance type, storage type configuration and size as specified in the CloudFormation template.
+
+NOTE: To keep things simple for this lab, we have kept most of the configuration static in the CloudFormation template.
+
+This Amazon RDS instance is pre-loaded with a sample schema (dms_sample). The sample schema mimics a simple sporting event ticketing application. The following diagram illustrates the data model we will be working in the lab.
+
+![CloudFormation](img/lab2-image1.png)
 
 # Labs
 This workshop is broken into multiple labs. You must complete each Lab before proceeding to the next.
 
 1. [Lab 1 - Setting up the Lab](Lab-Part1.md)
 
-2. [Lab 2 - Running the Lab](Lab-Part2.md)
+2. [Lab 2 - Connect to your environment](Lab-Part2.md)
+
+3. [Lab 3 - Using AWS SCT to convert the Schema](Lab-Part3.md)
+
+4. [Lab 4 - Validate the Converted Schema](Lab-Part4.md)
 
 
 ## License Summary
