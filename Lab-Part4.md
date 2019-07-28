@@ -34,11 +34,30 @@ Password | Password1
 
 6.	Run the following script to verify the number of object types and count in dms_sample_dw schema in the target Amazon Redshift database. These values should match the number of objects in the source Oracle database.
 
+  ```
+  SELECT 'TABLE' AS OBJECT_TYPE,
+         TABLE_NAME AS OBJECT_NAME,
+         TABLE_SCHEMA AS OBJECT_SCHEMA
+  FROM information_schema.TABLES
+  WHERE TABLE_TYPE = 'BASE TABLE'
+  AND   OBJECT_SCHEMA = 'dms_sample_dw'
+  ```
+The output from this query should be similar to the following.
+
+![EC2 Console](img/lab-4/lab4-image3.png)
+
+7.	Verify the sort and distributions keys that are created in the Amazon Redshift cluster by using the following query.
 ```
-SELECT 'TABLE' AS OBJECT_TYPE,
-       TABLE_NAME AS OBJECT_NAME,
-       TABLE_SCHEMA AS OBJECT_SCHEMA
-FROM information_schema.TABLES
-WHERE TABLE_TYPE = 'BASE TABLE'
-AND   OBJECT_SCHEMA = 'dms_sample_dw'
+SET search_path TO '$user', 'public',  'dms_sample_dw';
+SELECT tablename,
+       "column",
+       TYPE,
+       encoding,
+       distkey,
+       sortkey,
+       "notnull"
+FROM pg_table_def
+WHERE (distkey = TRUE OR sortkey <> 0);
 ```
+The results of the query reflect the distribution key (distkey) and sort key (sortkey) choices made by using AWS SCT key management.
+![EC2 Console](img/lab-4/lab4-image4.png)
