@@ -9,3 +9,4 @@ NOTE: To keep things simple for this lab, we have kept most of the configuration
 This Amazon RDS instance is pre-loaded with a sample schema (dms_sample). The sample schema mimics a simple sporting event ticketing application. The following diagram illustrates the data model we will be working in the lab.
 
 ![CloudFormation](img/lab2-image1.png)
+voya

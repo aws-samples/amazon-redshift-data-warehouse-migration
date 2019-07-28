@@ -1,0 +1,700 @@
+{
+   "AWSTemplateFormatVersion":"2010-09-09",
+   "Description":"This template creates resources necessary for Migrating Your Oracle Warehouse to Amazon Redshift Using AWS DMS and SCT.",
+   "Parameters":{
+      "KeyName":{
+         "Description":"Enter the name of your AWS key pair",
+         "Type":"AWS::EC2::KeyPair::KeyName"
+      }
+   },
+   "Mappings" : {
+     "RegionMap" : {
+       "us-east-1"      : { "32" : "ami-08c0a7138df957552"},
+       "eu-west-1"      : { "32" : "ami-0f12fdfe4d059c55a"},
+       "ap-southeast-1" : { "32" : "ami-0ed1a352c91feff22"}
+     },
+     "SourceRDSSnapshot" : {
+       "us-east-1"      : { "snapshot" : "arn:aws:rds:us-east-1:045618575699:snapshot:dmsdatawarehouse-2018"},
+       "ap-southeast-1"      : { "snapshot" : "arn:aws:rds:ap-southeast-1:045618575699:snapshot:dmsdatawarehouse111418sgp"},
+       "eu-west-1" : { "snapshot" : "arn:aws:rds:eu-west-1:045618575699:snapshot:dmsdatawarehouse111418ire"}
+     },
+     "AgentInstanceRegionMap" : {
+        "us-east-1"           : { "32" : "ami-0ca42ba68f37ccefe"},
+        "ap-southeast-1"      : { "32" : "ami-0cef60108967e82d3"},
+        "eu-west-1"           : { "32" : "ami-022941a59f26b6778"}
+      }
+   },
+   "Resources":{
+      "DmsVpc":{
+         "Type":"AWS::EC2::VPC",
+         "Properties":{
+            "CidrBlock":"172.31.0.0/16",
+            "EnableDnsSupport":"true",
+            "EnableDnsHostnames":"true",
+            "InstanceTenancy":"default",
+            "Tags":[
+               {
+                  "Key":"Name",
+                  "Value":{
+                     "Fn::Join":[
+                        "-",
+                        [
+                           {
+                              "Ref":"AWS::StackName"
+                           },
+                           "DmsVpc"
+                        ]
+                     ]
+                  }
+               }
+            ]
+         }
+      },
+      "DMSInternetGateway":{
+         "Type":"AWS::EC2::InternetGateway",
+         "Properties":{
+            "Tags":[
+               {
+                  "Key":"Name",
+                  "Value":{
+                     "Fn::Join":[
+                        "-",
+                        [
+                           {
+                              "Ref":"AWS::StackName"
+                           },
+                           "DMSInternetGateway"
+                        ]
+                     ]
+                  }
+               }
+            ]
+         }
+      },
+      "DMSAttachGateway":{
+         "Type":"AWS::EC2::VPCGatewayAttachment",
+         "Properties":{
+            "VpcId":{
+               "Ref":"DmsVpc"
+            },
+            "InternetGatewayId":{
+               "Ref":"DMSInternetGateway"
+            }
+         }
+      },
+      "DmsSubnet1":{
+         "Type":"AWS::EC2::Subnet",
+         "Properties":{
+            "VpcId":{
+               "Ref":"DmsVpc"
+            },
+            "MapPublicIpOnLaunch":"true",
+            "CidrBlock":"172.31.0.0/24",
+            "AvailabilityZone":{
+              "Fn::Select" : [ "0", { "Fn::GetAZs" : "" } ]
+            },
+            "Tags":[
+               {
+                  "Key":"Name",
+                  "Value":{
+                     "Fn::Join":[
+                        "-",
+                        [
+                           {
+                              "Ref":"AWS::StackName"
+                           },
+                           "DmsSubnet1"
+                        ]
+                     ]
+                  }
+               }
+            ]
+         }
+      },
+      "DmsSubnet2":{
+         "Type":"AWS::EC2::Subnet",
+         "Properties":{
+            "VpcId":{
+               "Ref":"DmsVpc"
+            },
+            "MapPublicIpOnLaunch":"true",
+            "CidrBlock":"172.31.8.0/24",
+            "AvailabilityZone":{
+              "Fn::Select" : [ "1", { "Fn::GetAZs" : "" } ]
+            },
+            "Tags":[
+               {
+                  "Key":"Name",
+                  "Value":{
+                     "Fn::Join":[
+                        "-",
+                        [
+                           {
+                              "Ref":"AWS::StackName"
+                           },
+                           "DmsSubnet2"
+                        ]
+                     ]
+                  }
+               }
+            ]
+         }
+      },
+      "DmsSubnet3":{
+         "Type":"AWS::EC2::Subnet",
+         "Properties":{
+            "VpcId":{
+               "Ref":"DmsVpc"
+            },
+            "MapPublicIpOnLaunch":"true",
+            "CidrBlock":"172.31.16.0/24",
+            "AvailabilityZone":{
+              "Fn::Select" : [ "2", { "Fn::GetAZs" : "" } ]
+            },
+            "Tags":[
+               {
+                  "Key":"Name",
+                  "Value":{
+                     "Fn::Join":[
+                        "-",
+                        [
+                           {
+                              "Ref":"AWS::StackName"
+                           },
+                           "DmsSubnet3"
+                        ]
+                     ]
+                  }
+               }
+            ]
+         }
+      },
+      "DmsDbSubnetGroup":{
+         "Type":"AWS::RDS::DBSubnetGroup",
+         "Properties":{
+            "DBSubnetGroupDescription":"DMS DB Subnet Group",
+            "SubnetIds":[
+               {
+                  "Ref":"DmsSubnet1"
+               },
+               {
+                  "Ref":"DmsSubnet2"
+               },
+               {
+                  "Ref":"DmsSubnet3"
+               }
+            ],
+            "Tags":[
+               {
+                  "Key":"Name",
+                  "Value":{
+                     "Fn::Join":[
+                        "-",
+                        [
+                           {
+                              "Ref":"AWS::StackName"
+                           },
+                           "DmsDbSubnetGroup"
+                        ]
+                     ]
+                  }
+               }
+            ]
+         },
+         "DependsOn" : "DmsPublicRoute"
+      },
+      "DmsClusterSubnetGroup" : {
+        "Type" : "AWS::Redshift::ClusterSubnetGroup",
+        "Properties" : {
+          "Description" : "DMS Redshift Cluster Subnet Group",
+          "SubnetIds":[
+             {
+                "Ref":"DmsSubnet1"
+             },
+             {
+                "Ref":"DmsSubnet2"
+             },
+             {
+                "Ref":"DmsSubnet3"
+             }
+          ],
+          "Tags":[
+             {
+                "Key":"Name",
+                "Value":{
+                   "Fn::Join":[
+                      "-",
+                      [
+                         {
+                            "Ref":"AWS::StackName"
+                         },
+                         "DmsClusterSubnetGroup"
+                      ]
+                   ]
+                }
+             }
+          ]
+       }
+      },
+      "DmsPublicRouteTable":{
+         "Type":"AWS::EC2::RouteTable",
+         "Properties":{
+            "VpcId":{
+               "Ref":"DmsVpc"
+            },
+            "Tags":[
+               {
+                  "Key":"Name",
+                  "Value":{
+                     "Fn::Join":[
+                        "-",
+                        [
+                           {
+                              "Ref":"AWS::StackName"
+                           },
+                           "DmsPublicRouteTable"
+                        ]
+                     ]
+                  }
+               }
+            ]
+         },
+         "DependsOn" : "DMSAttachGateway"
+      },
+      "DmsPublicRoute":{
+         "Type":"AWS::EC2::Route",
+         "Properties":{
+            "RouteTableId":{
+               "Ref":"DmsPublicRouteTable"
+            },
+            "DestinationCidrBlock":"0.0.0.0/0",
+            "GatewayId":{
+               "Ref":"DMSInternetGateway"
+            }
+         },
+         "DependsOn" : "DMSAttachGateway"
+      },
+      "DmsSubnet1RouteTableAssociation":{
+         "Type":"AWS::EC2::SubnetRouteTableAssociation",
+         "Properties":{
+            "SubnetId":{
+               "Ref":"DmsSubnet1"
+            },
+            "RouteTableId":{
+               "Ref":"DmsPublicRouteTable"
+            }
+         }
+      },
+      "DmsSubnet2RouteTableAssociation":{
+         "Type":"AWS::EC2::SubnetRouteTableAssociation",
+         "Properties":{
+            "SubnetId":{
+               "Ref":"DmsSubnet2"
+            },
+            "RouteTableId":{
+               "Ref":"DmsPublicRouteTable"
+            }
+         }
+      },
+      "DmsSubnet3RouteTableAssociation":{
+         "Type":"AWS::EC2::SubnetRouteTableAssociation",
+         "Properties":{
+            "SubnetId":{
+               "Ref":"DmsSubnet3"
+            },
+            "RouteTableId":{
+               "Ref":"DmsPublicRouteTable"
+            }
+         }
+      },
+      "OracleRDSSecurityGroup":{
+         "Type":"AWS::EC2::SecurityGroup",
+         "Properties":{
+            "VpcId":{
+               "Ref":"DmsVpc"
+            },
+            "GroupDescription":"Enable access into Oracle RDS DB",
+            "SecurityGroupIngress":[
+               {
+                  "IpProtocol":"tcp",
+                  "FromPort":"1521",
+                  "ToPort":"1521",
+                  "CidrIp":"172.31.0.0/16"
+               },
+               {
+                  "IpProtocol":"tcp",
+                  "FromPort":"1630",
+                  "ToPort":"1630",
+                  "CidrIp":"172.31.0.0/16"
+               }
+            ]
+         }
+      },
+      "RedshiftSecurityGroup":{
+         "Type":"AWS::EC2::SecurityGroup",
+         "Properties":{
+            "VpcId":{
+               "Ref":"DmsVpc"
+            },
+            "GroupDescription":"Enable access into Redshift cluster",
+            "SecurityGroupIngress":[
+               {
+                  "IpProtocol":"tcp",
+                  "FromPort":"5439",
+                  "ToPort":"5439",
+                  "CidrIp":"172.31.0.0/16"
+               }
+            ]
+         }
+      },
+      "Reinvent2018ANT371InstanceSecurityGroup":{
+         "Type":"AWS::EC2::SecurityGroup",
+         "Properties":{
+            "VpcId":{
+               "Ref":"DmsVpc"
+            },
+            "GroupDescription":"Enable RDP and Database access into the Instance",
+            "SecurityGroupIngress":[
+              {
+                "IpProtocol":"tcp",
+                "FromPort":"3389",
+                "ToPort":"3389",
+                "CidrIp":"0.0.0.0/0"
+             },
+             {
+                "IpProtocol":"tcp",
+                "FromPort":"1521",
+                "ToPort":"1521",
+                "CidrIp":"172.31.0.0/16"
+             },
+             {
+                "IpProtocol":"tcp",
+                "FromPort":"8192",
+                "ToPort":"8192",
+                "CidrIp":"172.31.0.0/16"
+             },
+             {
+                "IpProtocol":"tcp",
+                "FromPort":"5439",
+                "ToPort":"5439",
+                "CidrIp":"172.31.0.0/16"
+             },
+             {
+                "IpProtocol":"tcp",
+                "FromPort":"22",
+                "ToPort":"22",
+                "CidrIp":"0.0.0.0/0"
+             }
+            ]
+         }
+      },
+      "RedshiftS3Role": {
+        "Type": "AWS::IAM::Role",
+        "Properties": {
+          "RoleName": {
+               "Fn::Join":[
+                  "-",
+                  [
+                     {
+                        "Ref":"AWS::StackName"
+                     },
+                     "redshift-dms-s3"
+                  ]
+               ]
+            },
+          "AssumeRolePolicyDocument": {
+            "Version": "2012-10-17",
+            "Statement": [{
+              "Effect": "Allow",
+              "Principal": {"Service": "redshift.amazonaws.com"},
+              "Action": ["sts:AssumeRole"]
+              }]
+            },
+         "Policies": [{
+           "PolicyName": "redshift-dms-s3-role",
+           "PolicyDocument": {
+             "Version": "2012-10-17",
+             "Statement": [
+               {
+               "Effect": "Allow",
+               "Action": "s3:*",
+               "Resource": [
+                 {"Fn::Join": ["", ["arn:aws:s3:::", { "Ref" : "S3Bucket" }]]},
+                 {"Fn::Join": ["", ["arn:aws:s3:::", { "Ref" : "S3Bucket" },"/*"]]}
+               ]}
+              ]
+             }
+         }]
+        }
+      },
+      "OracleSourceDB":{
+        "Type" : "AWS::RDS::DBInstance",
+          "Properties" : {
+            "DBInstanceClass" : "db.m4.xlarge",
+			      "DBName" : "DMSDW",
+			      "AllocatedStorage" : "100",
+            "LicenseModel" : "bring-your-own-license",
+			      "Engine" : "oracle-ee",
+			      "EngineVersion" : "12.1.0.2.v13",
+            "StorageType"  : "io1",
+            "Iops" : "3000",
+			      "Tags" : [ {"Key" : "Application", "Value" : "Oracle RDS instance for ANT317" } ],
+            "DBSnapshotIdentifier" : { "Fn::FindInMap" : [ "SourceRDSSnapshot", { "Ref" : "AWS::Region" }, "snapshot"]},
+			      "VPCSecurityGroups" : [ { "Ref" : "OracleRDSSecurityGroup" }  ],
+            "DBInstanceIdentifier" :
+            {
+               "Fn::Join":[
+                  "-",
+                  [
+                     {
+                        "Ref":"AWS::StackName"
+                     },
+                     "OracleInstance"
+                  ]
+               ]
+            },
+            "DBSubnetGroupName":{
+               "Ref":"DmsDbSubnetGroup"
+            },
+            "PubliclyAccessible":"true"
+          }
+      },
+      "RedshiftTargetCluster":{
+        "Type": "AWS::Redshift::Cluster",
+        "Properties": {
+          "ClusterType": "single-node",
+          "NodeType": "dc1.large",
+          "DBName": "dmsdwtarget",
+          "IamRoles" : [{
+            "Fn::GetAtt":[
+               "RedshiftS3Role",
+               "Arn"
+            ]
+          }],
+          "MasterUsername": "dms_sample_dw",
+          "MasterUserPassword": "Password1",
+		  "VpcSecurityGroupIds" : [ { "Ref" : "RedshiftSecurityGroup" } ],
+          "ClusterSubnetGroupName":{
+             "Ref":"DmsClusterSubnetGroup"
+          },
+          "PubliclyAccessible": "true"
+        }
+      },
+      "Reinvent2018ANT371Instance":{
+         "Type":"AWS::EC2::Instance",
+         "Properties":{
+            "SubnetId":{
+               "Ref":"DmsSubnet1"
+            },
+            "InstanceType":"m5.large",
+            "SecurityGroupIds":[
+               {
+                  "Ref":"Reinvent2018ANT371InstanceSecurityGroup"
+               }
+            ],
+            "KeyName":{
+               "Ref":"KeyName"
+            },
+            "Tags":[
+               {
+                  "Key":"Name",
+                  "Value":{
+                     "Fn::Join":[
+                        "-",
+                        [
+                           {
+                              "Ref":"AWS::StackName"
+                           },
+                           "SCTWinEC2"
+                        ]
+                     ]
+                  }
+               }
+            ],
+            "BlockDeviceMappings":[
+               {
+                  "DeviceName":"/dev/sda1",
+                  "Ebs":{
+                     "DeleteOnTermination":"true",
+                     "Iops":"7500",
+                     "VolumeSize":"150",
+                     "VolumeType":"io1"
+                  }
+               }
+            ],
+            "ImageId": { "Fn::FindInMap" : [ "RegionMap", { "Ref" : "AWS::Region" }, "32"]}
+         },
+         "DependsOn" : "DMSInternetGateway"
+      },
+      "Reinvent2018ANT371AgentInstance1":{
+        "Type":"AWS::EC2::Instance",
+        "Properties":{
+           "SubnetId":{
+              "Ref":"DmsSubnet1"
+           },
+           "InstanceType":"t2.xlarge",
+           "SecurityGroupIds":[
+              {
+                 "Ref":"Reinvent2018ANT371InstanceSecurityGroup"
+              }
+           ],
+           "KeyName":{
+              "Ref":"KeyName"
+           },
+           "Tags":[
+              {
+                 "Key":"Name",
+                 "Value":{
+                    "Fn::Join":[
+                       "-",
+                       [
+                          {
+                             "Ref":"AWS::StackName"
+                          },
+                          "Reinvent2018ANT371AGENTINSTANCE-1"
+                       ]
+                    ]
+                 }
+              }
+           ],
+           "BlockDeviceMappings":[
+              {
+                 "DeviceName":"/dev/sda1",
+                 "Ebs":{
+                    "DeleteOnTermination":"true",
+                    "VolumeSize":"100",
+                    "VolumeType":"gp2"
+                 }
+              }
+           ],
+           "ImageId": { "Fn::FindInMap" : [ "AgentInstanceRegionMap", { "Ref" : "AWS::Region" }, "32"]}
+        },
+        "DependsOn" : "DMSInternetGateway"
+     },
+     "Reinvent2018ANT371AgentInstance2":{
+        "Type":"AWS::EC2::Instance",
+        "Properties":{
+           "SubnetId":{
+              "Ref":"DmsSubnet1"
+           },
+           "InstanceType":"t2.xlarge",
+           "SecurityGroupIds":[
+              {
+                 "Ref":"Reinvent2018ANT371InstanceSecurityGroup"
+              }
+           ],
+           "KeyName":{
+              "Ref":"KeyName"
+           },
+           "Tags":[
+              {
+                 "Key":"Name",
+                 "Value":{
+                    "Fn::Join":[
+                       "-",
+                       [
+                          {
+                             "Ref":"AWS::StackName"
+                          },
+                          "Reinvent2018ANT371AGENTINSTANCE-2"
+                       ]
+                    ]
+                 }
+              }
+           ],
+           "BlockDeviceMappings":[
+              {
+                 "DeviceName":"/dev/sda1",
+                 "Ebs":{
+                    "DeleteOnTermination":"true",
+                    "VolumeSize":"100",
+                    "VolumeType":"gp2"
+                 }
+              }
+           ],
+           "ImageId": { "Fn::FindInMap" : [ "AgentInstanceRegionMap", { "Ref" : "AWS::Region" }, "32"]}
+        },
+        "DependsOn" : "DMSInternetGateway"
+     },
+      "S3Bucket":{
+        "Type" : "AWS::S3::Bucket"
+      }
+   },
+   "Outputs":{
+      "Reinvent2018ANT371SCTDNS":{
+         "Description":"Public DNS Name of the Reinvent2018ANT371 SCT Windows instance",
+         "Value":{
+            "Fn::GetAtt":[
+               "Reinvent2018ANT371Instance",
+               "PublicDnsName"
+            ]
+         }
+      },
+      "Reinvent2018ANT371AGENT1PublicDNS":{
+        "Description":"Public DNS Name of the Reinvent2018ANT371 SCT Agent1 EC2 linux instance",
+        "Value":{
+           "Fn::GetAtt":[
+              "Reinvent2018ANT371AgentInstance1",
+              "PublicDnsName"
+           ]
+        }
+     },
+     "Reinvent2018ANT371AGENT1PrivateIP":{
+        "Description":"Private IP of the Reinvent2018ANT371 SCT Agent1 EC2 linux instance",
+        "Value":{
+           "Fn::GetAtt":[
+              "Reinvent2018ANT371AgentInstance1",
+              "PrivateIp"
+           ]
+        }
+     },
+     "Reinvent2018ANT371AGENT2PublicDNS":{
+        "Description":"Public DNS Name of the Reinvent2018ANT371 SCT Agent2 EC2 linux instance",
+        "Value":{
+           "Fn::GetAtt":[
+              "Reinvent2018ANT371AgentInstance2",
+              "PublicDnsName"
+           ]
+        }
+     },
+     "Reinvent2018ANT371AGENT2PrivateIP":{
+        "Description":"Private IP of the Reinvent2018ANT371 SCT Agent2 EC2 linux instance",
+        "Value":{
+           "Fn::GetAtt":[
+              "Reinvent2018ANT371AgentInstance2",
+              "PrivateIp"
+           ]
+        }
+     },
+      "Reinvent2018ANT371OracleEndpoint":{
+         "Description":"Endpoint of source Oracle RDS DB instance",
+         "Value":{
+           "Fn::GetAtt":[
+              "OracleSourceDB",
+              "Endpoint.Address"
+            ]
+         }
+      },
+      "Reinvent2018ANT371RedshiftEndpoint":{
+         "Description":"Endpoint of target Redshift instance",
+         "Value":{
+            "Fn::GetAtt":[
+               "RedshiftTargetCluster",
+               "Endpoint.Address"
+            ]
+         }
+      },
+      "Reinvent2018ANT371VpcId":{
+         "Description":"ANT371 workshop VPC Identifier",
+         "Value":{
+            "Ref":"DmsVpc"
+         }
+      },
+      "Reinvent2018ANT371S3Bucket":{
+         "Description":"ANT371 workshop S3 bucket",
+         "Value":{
+            "Ref":"S3Bucket"
+         }
+      }
+    }
+}
