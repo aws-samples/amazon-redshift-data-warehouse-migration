@@ -54,7 +54,3 @@ Password | Password1
 Amazon Redshift Driver Path | C:\Users\Administrator\Desktop\ANT371\RedshiftDrivers\RedshiftJDBC42-1.2.16.1027.jar
 
 ![EC2 Console](img/lab-2/lab2-image9.png)
-
-
-
-## Use AWS SCT to convert schema from source Oracle to target Amazon Redshift

@@ -44,7 +44,7 @@ Password | Password1
   ```
 The output from this query should be similar to the following.
 
-![EC2 Console](img/lab-4/lab4-image3.png)
+  ![EC2 Console](img/lab-4/lab4-image3.png)
 
 7.	Verify the sort and distributions keys that are created in the Amazon Redshift cluster by using the following query.
 ```

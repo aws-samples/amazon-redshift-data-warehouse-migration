@@ -52,6 +52,12 @@ This workshop is broken into multiple labs. You must complete each Lab before pr
 
 4. [Lab 4 - Validate the Converted Schema](Lab-Part4.md)
 
+5. [Lab 5 - Configuring SCT for AWS data extraction agents](Lab-Part5.md)
+
+6. [Lab 6 - Working with AWS SCT Extraction Agents](Lab-Part6.md)
+
+7. [Lab 7 - Conclusion](Lab-Part7.md)
+
 
 ## License Summary
 
