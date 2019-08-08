@@ -34,7 +34,7 @@ Server name | Take this from the output of the CloudFormation template in Step 8
 Server port | 1521
 Oracle SID | DMSDW
 User name | dms_sample_dw
-Password | Password1
+Password | <Refer to the Cloud Formation output for the database password>
 Oracle Driver Path | Specify the Oracle driver path as C:\Users\Administrator\Desktop\ANT371\OracleDrivers\ojdbc7.jar
 ![EC2 Console](img/lab-2/lab2-image7.png)
 
@@ -50,7 +50,7 @@ Server name | Take this from the output of the CloudFormation template in Step 8
 Server port | 5439
 Database | dmsdwtarget
 User name | dms_sample_dw
-Password | Password1
+Password | <Refer to the Cloud Formation output for the database password>
 Amazon Redshift Driver Path | C:\Users\Administrator\Desktop\ANT371\RedshiftDrivers\RedshiftJDBC42-1.2.16.1027.jar
 
 ![EC2 Console](img/lab-2/lab2-image9.png)

@@ -695,6 +695,14 @@
          "Value":{
             "Ref":"S3Bucket"
          }
+      },
+      "CredDatabaseDetails":{
+         "Description":"DB Cluster Login",
+         "Value": "Password1"
+      },
+      "CredSCTDetails":{
+         "Description":"SCT Windows Login",
+         "Value": "Password1"
       }
     }
 }
