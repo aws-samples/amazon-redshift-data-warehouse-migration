@@ -28,7 +28,7 @@ Now that the environment has been built, the next step is to connect to the EC2 
 
   ![EC2 Console](img/lab-2/lab2-image5.png)
 
-4.	A New Database Migration Project page opens. If a new project does not open then click on ** File ** and ** New Project.**  Provide a Project Name of your choice (recommended ** Reinvent2018ANT371 **) and leave Location default.  Make sure you select ** Data Warehouse (OLAP) ** and Source Database Engine as ** Oracle DW **  and the Target Database Engine as ** Amazon Redshift.**  Click OK.
+4.	A New Database Migration Project page opens. If a new project does not open then click on ** File ** and ** New Project.**  Provide a Project Name of your choice (recommended **Reinvent2018ANT371**) and leave Location default.  Make sure you select **Data Warehouse (OLAP)** and Source Database Engine as **Oracle DW**  and the Target Database Engine as **Amazon Redshift.**  Click OK.
 
   ![EC2 Console](img/lab-2/lab2-image6.png)
 
@@ -49,7 +49,7 @@ Now that the environment has been built, the next step is to connect to the EC2 
 
   ![EC2 Console](img/lab-2/lab2-image8.png)
 
-7.	Click on the Connect to Amazon Redshift on the top menu and put in the following details anc click Test Connection. It should come back with a message ‘Connection successful’. Then click OK.
+7.	Click on the Connect to Amazon Redshift on the top menu and put in the following details and click Test Connection. It should come back with a message ‘Connection successful’. Then click OK.
 
   Type | SID
   ---- | ----
