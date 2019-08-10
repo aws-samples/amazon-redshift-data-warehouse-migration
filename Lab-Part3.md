@@ -10,9 +10,10 @@
 
  >
   The AWS SCT creates a database migration assessment report to help you convert your schema. The database migration assessment report provides important information about the conversion of the schema from your source database to your target database instance. The report summarizes all of the schema conversion tasks and details the action items for schema that can't be converted to the DB engine of your target DB instance. The report also includes estimates of the amount of effort that it will take to write the equivalent code in your target DB instance that can't be converted automatically.
-
+>
   ![EC2 Console](img/lab-3/lab3-image2.png)
 
+>
   ![EC2 Console](img/lab-3/lab3-image3.png)
 
 3. 	Choose the Action Items tab. This tab will show all the items that need to be fixed before they can be migrated. E.g. data types that mismatch, objects not supported by Redshift like stored procedures, materialised views etc.
