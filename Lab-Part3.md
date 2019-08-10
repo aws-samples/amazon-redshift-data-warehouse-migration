@@ -37,18 +37,18 @@ In a real life scenario you will need to work through these issues and resolve t
 
 5. To optimise how the AWS Schema Conversion Tool (AWS SCT) converts your data warehouse schema, you can choose the strategies and rules you want the tool to use. After converting your schema, and reviewing the suggested keys, you can adjust your rules or change your strategy to get the results you want. Choose Settings, and then choose Project Settings. The Current project settings dialog box appears. In the left pane, choose optimisation Strategies. The optimisation strategies appear in the right pane with the defaults selected. For optimisation Strategies, choose the optimisation strategy you want to use.
 
-  You can choose from the following:
+You can choose from the following:
       * Use metadata, ignore statistical information
       * Ignore metadata, use statistical information
       *	Use metadata and use statistical information
 
-  After you choose your optimisation strategy, you can choose the rules you want to use and provide weights to each. You can choose from the following:
+After you choose your optimisation strategy, you can choose the rules you want to use and provide weights to each. You can choose from the following:
       * Choose Distribution Key and Sort Keys using metadata
       * Choose fact table and appropriate dimension for collation
       * Analyse cardinality of indexes' columns
       * Find the most used tables and columns from QueryLog table
 
-  For the purposes of this lab we will not change any settings and use the default.
+For the purposes of this lab we will not change any settings and use the default.
 
   ![EC2 Console](img/lab-3/lab3-image6.png)
 
