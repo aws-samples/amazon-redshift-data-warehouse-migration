@@ -1,10 +1,10 @@
 # Use AWS SCT to convert schema from source Oracle to target Amazon Redshift
 
-1.	Now you should see Redshift on the right hand side. Click on the dms_sample_dw schema on the left hand side in the Oracle DW. You may see a message saying loading metadata. Once that is done your screen should look like below.
+1. Now you should see Redshift on the right hand side. Click on the dms_sample_dw schema on the left hand side in the Oracle DW. You may see a message saying loading metadata. Once that is done your screen should look like below.
 
   ![EC2 Console](img/lab-3/lab3-image1.png)
 
-2.	Right click on the dms_sample_dw schema in the left pane and click Create Report. This will create an assessement report.
+2. Right click on the dms_sample_dw schema in the left pane and click Create Report. This will create an assessement report.
  >
   You will get a message saying that ‘Your Optimization Settings require run-time statitics information from the source database. Would you like to load statistics?’ Click Continue. This will take about 30-40 secs and your Database Migration Assessement Report will be ready.
 
@@ -16,7 +16,7 @@
 
   ![EC2 Console](img/lab-3/lab3-image3.png)
 
-3. 	Choose the Action Items tab. This tab will show all the items that need to be fixed before they can be migrated. E.g. data types that mismatch, objects not supported by Redshift like stored procedures, materialised views etc.
+3. Choose the Action Items tab. This tab will show all the items that need to be fixed before they can be migrated. E.g. data types that mismatch, objects not supported by Redshift like stored procedures, materialised views etc.
 
     > ![EC2 Console](img/lab-3/lab3-image4.png)
 
