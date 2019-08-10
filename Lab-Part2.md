@@ -30,10 +30,10 @@ Now that the environment has been built, the next step is to connect to the EC2 
 
 4.	A New Database Migration Project page opens. If a new project does not open then click on ** File ** and ** New Project.**  Provide a Project Name of your choice (recommended **Reinvent2018ANT371**) and leave Location default.  Make sure you select **Data Warehouse (OLAP)** and Source Database Engine as **Oracle DW**  and the Target Database Engine as **Amazon Redshift.**  Click OK.
 
-  ![EC2 Console](img/lab-2/lab2-image6.png)
+  > ![EC2 Console](img/lab-2/lab2-image6.png)
 
 5.	Click on Connect to Oracle DW on the top menu and put in the following details and click Test Connection. It should come back with a message ‘Connection successful’. Then click OK. Update screen shot
-
+  >
   Type | SID
   ---- | ----
   Server name | Take this from the output of the CloudFormation template in Step 8. It is the Reinvent2018ANT371OracleEndpoint output field.
@@ -43,7 +43,7 @@ Now that the environment has been built, the next step is to connect to the EC2 
   Password | <Refer to the Cloud Formation output for the database password>
   Oracle Driver Path | Specify the Oracle driver path as C:\Users\Administrator\Desktop\ANT371\OracleDrivers\ojdbc7.jar
 
-  ![EC2 Console](img/lab-2/lab2-image7.png)
+  > ![EC2 Console](img/lab-2/lab2-image7.png)
 
 6.	Now you should see the Oracle DW schema on your left as shown below.
 
