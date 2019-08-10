@@ -22,11 +22,11 @@ Now that the environment has been built, the next step is to connect to the EC2 
 
 2. After clicking AWS Schema Conversion Tool, wait for a minute for the tool to launch, hit Run and install AWS Schema Conversion Tool. Once installed, be aware there will be no confirmation message of the installation. Click on Windows Start button, and click on Down Arrow to list Apps, drag the bar to the right until you see AWS Schema Conversion Tool as seen below:
 
-  ![EC2 Console](img/lab-2/lab2-image4.png)
+  > ![EC2 Console](img/lab-2/lab2-image4.png)
 
 3.	Click on Schema Conversion Tool to open the application.  You may see a message that asks to download new version, click Not now button and proceed. If you do upgrade then your screen shots may vary from what we have in the lab document.
 
-  ![EC2 Console](img/lab-2/lab2-image5.png)
+  > ![EC2 Console](img/lab-2/lab2-image5.png)
 
 4.	A New Database Migration Project page opens. If a new project does not open then click on ** File ** and ** New Project.**  Provide a Project Name of your choice (recommended **Reinvent2018ANT371**) and leave Location default.  Make sure you select **Data Warehouse (OLAP)** and Source Database Engine as **Oracle DW**  and the Target Database Engine as **Amazon Redshift.**  Click OK.
 
