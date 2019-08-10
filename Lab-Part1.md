@@ -11,25 +11,27 @@ The CloudFormation script can be launched only from Singapore region only and do
 
 ## Creating the stack using the CloudFormation template
 
-1. Login to the AWS Management Console and select CloudFormation under Management tools.
+1. Login to the AWS Management Console and select CloudFormation under Management tools.  
 
-  ![AWS Management Console](img/lab1-image1.png)
+  ![](img/lab1-image1.png)  
 
 2. Once you are on the CloudFormation page, select the “Create Stack” option to create a new stack.
 
-    > ![CloudFormation](img/lab1-image01.png)
+    ![](img/lab1-image01.png)   
+    <br/>
 
-3. Click Choose File and select Upload a template to Amazon S3 and Browse to where you downloaded the Zip file. Select the CloudFormation template called MigrationCloudFormation.json under the cloudformation directory and then click Next.
+3. Click Choose File and select Upload a template to Amazon S3 and Browse to where you downloaded the Zip file. Select the CloudFormation template called MigrationCloudFormation.json under the cloudformation directory and then click Next.   
 
-  > ![CloudFormation-Stack](img/lab1-image03.png)
+  ![](img/lab1-image03.png)   
+  <br/>
 
+4. Populate the form with the values specified below and then click Next.    
 
-4. Populate the form with the values specified below and then click Next.
+  **Stack Name:**	Any name you would like to give the stack. but recommended name to be unique like DWMigration2019. Please append your initials if multiple people are running the lab in the same account.   
+  <br/>
 
-  > **Stack Name:**	Any name you would like to give the stack. but recommended name to be unique like DWMigration2019. Please append your initials if multiple people are running the lab in the same account.
-
-  > **KeyName:**	Select a key in Singapore region from the dropdown. If you created a key in step 1 then select that key or else select another key already existing in your account.
-
+  **KeyName:**	Select a key in Singapore region from the dropdown. If you created a key in step 1 then select that key or else select another key already existing in your account.  
+  <br/>
 
 5. On the Options page, put the following values for Tags and click Next.  All other values can remain as default.
 
