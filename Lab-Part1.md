@@ -22,30 +22,32 @@ The CloudFormation script can be launched only from Singapore region only and do
 
 3. Click Choose File and select Upload a template to Amazon S3 and Browse to where you downloaded the Zip file. Select the CloudFormation template called MigrationCloudFormation.json under the cloudformation directory and then click Next.   
 
-  ![](img/lab1-image03.png)   
+    ![](img/lab1-image03.png)   
   <br/>
 
 4. Populate the form with the values specified below and then click Next.    
 
-  **Stack Name:**	Any name you would like to give the stack. but recommended name to be unique like DWMigration2019. Please append your initials if multiple people are running the lab in the same account.   
-  <br/>
+      > **Stack Name:**	Any name you would like to give the stack. but recommended name to be unique like DWMigration2019. Please append your initials if multiple people are running the lab in the same account.      
 
-  **KeyName:**	Select a key in Singapore region from the dropdown. If you created a key in step 1 then select that key or else select another key already existing in your account.  
-  <br/>
+      > **KeyName:**	Select a key in Singapore region from the dropdown. If you created a key in step 1 then select that key or else select another key already existing in your account.  
+
+<br/>
 
 5. On the Options page, put the following values for Tags and click Next.  All other values can remain as default.
 
-      > Key = Environment   
-      > Value = DWMigration2019
+       > Key = Environment   
+       > Value = DWMigration2019
+
+ <br/>
 
 6. On the Review page, At the bottom of the screen please make sure you check the box ‘I acknowledge that AWS CloudFormation might create IAM resources with custom names.’ and Click Create.
 
   ![CloudFormation-Acknowledgement](img/lab1-image5.png)
-
+<br/>
 
 7. You can observe the execution progress of CloudFormation as show below.
   ![CloudFormation-Progress](img/lab1-image6.png)
-
+<br/>
 
 8. At this point, you will be directed back to the CloudFormation console and will see a status of CREATE_IN_PROGRESS.  Do not continue until the status changes to CREATE_COMPLETE.
 
@@ -66,5 +68,6 @@ The CloudFormation script can be launched only from Singapore region only and do
   | CredDatabaseDetails | Credentials for Oracle database and Amazon Redshift |
   | CredSCTDetails | Password for login to Windows SCT server. |
 
+<br/>
 
 This lab will conclude once the CloudFormation completes successfully and the user identifies the AWS resources properties in the output tab in CloudFormation Console.   Please proceed to the next lab.
