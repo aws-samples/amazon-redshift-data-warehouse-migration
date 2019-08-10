@@ -13,16 +13,18 @@ The CloudFormation script can be launched only from Singapore region only and do
 
 1. Login to the AWS Management Console and select CloudFormation under Management tools.
 
-![AWS Management Console](img/lab1-image1.png)
+  ![AWS Management Console](img/lab1-image1.png)
+
+
 
 
 2. Once you are on the CloudFormation page, select the “Create Stack” option to create a new stack.
-![CloudFormation](img/lab1-image01.png)
 
+  ![CloudFormation](img/lab1-image01.png)
 
-3.Click Choose File and select Upload a template to Amazon S3 and Browse to where you downloaded the Zip file. Select the CloudFormation template called MigrationCloudFormation.json under the cloudformation directory and then click Next.
+3. Click Choose File and select Upload a template to Amazon S3 and Browse to where you downloaded the Zip file. Select the CloudFormation template called MigrationCloudFormation.json under the cloudformation directory and then click Next.
 
-![CloudFormation-Stack](img/lab1-image03.png)
+  ![CloudFormation-Stack](img/lab1-image03.png)
 
 
 4. Populate the form with the values specified below and then click Next.
@@ -34,9 +36,8 @@ The CloudFormation script can be launched only from Singapore region only and do
 
 5. On the Options page, put the following values for Tags and click Next.  All other values can remain as default.
 
-  Key = Environment   
-  Value = DWMigration2019
-
+      Key = Environment   
+      Value = DWMigration2019
 
 6. On the Review page, At the bottom of the screen please make sure you check the box ‘I acknowledge that AWS CloudFormation might create IAM resources with custom names.’ and Click Create.
 
@@ -52,19 +53,19 @@ The CloudFormation script can be launched only from Singapore region only and do
 
 9. Once CloudFormation has completed building the stack, the status will change to create_complete. Make sure to note the values for the following keys in the OUTPUTS tab. These will be needed as input for SCT and DMS setup.
 
-| Output Field Name | Description |
-| --- | --- |
-| Reinvent2018ANT371RedshiftEndpoint | End point for the Redshift cluster |
-| Reinvent2018ANT371VpcId | VPC ID of the newly created VPC |
-| Reinvent2018ANT371OracleEndpoint | End point of the source RDS database |
-| Reinvent2018ANT371SCTDNS | End point for the EC2 instance with SCT and drivers installed. |
-| Reinvent2018ANT371AGENT1PublicDNS | Public end point for first EC2 instance with SCT Extraction agent. |
-| Reinvent2018ANT371AGENT1PrivateIP | Private IP for first EC2 instance with SCT Extraction agent |
-| Reinvent2018ANT371AGENT2PublicDNS | End point for second EC2 instance with SCT Extraction agent. |
-| Reinvent2018ANT371AGENT2PrivateIP | VPrivate IP for second EC2 instance with SCT Extraction agent. |
-| Reinvent2018ANT371S3Bucket | S3 Bucket name. |
-| CredDatabaseDetails | Credentials for Oracle database and Amazon Redshift |
-| CredSCTDetails | Password for login to Windows SCT server. |
+  | Output Field Name | Description |
+  | --- | --- |
+  | Reinvent2018ANT371RedshiftEndpoint | End point for the Redshift cluster |
+  | Reinvent2018ANT371VpcId | VPC ID of the newly created VPC |
+  | Reinvent2018ANT371OracleEndpoint | End point of the source RDS database |
+  | Reinvent2018ANT371SCTDNS | End point for the EC2 instance with SCT and drivers installed. |
+  | Reinvent2018ANT371AGENT1PublicDNS | Public end point for first EC2 instance with SCT Extraction agent. |
+  | Reinvent2018ANT371AGENT1PrivateIP | Private IP for first EC2 instance with SCT Extraction agent |
+  | Reinvent2018ANT371AGENT2PublicDNS | End point for second EC2 instance with SCT Extraction agent. |
+  | Reinvent2018ANT371AGENT2PrivateIP | VPrivate IP for second EC2 instance with SCT Extraction agent. |
+  | Reinvent2018ANT371S3Bucket | S3 Bucket name. |
+  | CredDatabaseDetails | Credentials for Oracle database and Amazon Redshift |
+  | CredSCTDetails | Password for login to Windows SCT server. |
 
 
 This lab will conclude once the CloudFormation completes successfully and the user identifies the AWS resources properties in the output tab in CloudFormation Console.   Please proceed to the next lab.
