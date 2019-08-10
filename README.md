@@ -12,7 +12,7 @@ As shown in the diagram above, multiple SCT extraction agents extract your data 
 
 Pre-requisites to be completed before creating the stack
 
-a.	Amazon EC2 Key Pair - The CloudFormation template requires an Amazon EC2 Key Pair as an input. This key pair is required to access the EC2 instances on which the SCT extraction agents will run. If you do not have an existing key pair in the region, please create one before launching the CloudFormation template.
+a.	**Amazon EC2 Key Pair** - The CloudFormation template requires an Amazon EC2 Key Pair as an input. This key pair is required to access the EC2 instances on which the SCT extraction agents will run. If you do not have an existing key pair in the region, please create one before launching the CloudFormation template.
 
 **Note: - This lab should be run in the Singapore region. Please make sure you select Singapore region before you go to the next steps outlined below.**
 
@@ -25,9 +25,9 @@ If you do not have a key in the Singapore region, please follow these steps
 3. Click on Key Pairs on the left hand menu and then click on Create Key Pair.   Give your key pair a name e.g. Works371 and click Create. A dialog box will open asking you to save the key file. Click on Save File to save the key. Remember where you saved the key or move it to another folder of your choice. You will need this later.
 
 
-b. IAM Permissions – You need IAM permissions to create resources such as Amazon VPC, Amazon Redshift cluster, Amazon RDS instances, Amazon EC2 instances and Amazon S3 buckets.
+b. **IAM Permissions** – You need IAM permissions to create resources such as Amazon VPC, Amazon Redshift cluster, Amazon RDS instances, Amazon EC2 instances and Amazon S3 buckets.
 
-c.	AWS Limits - Ensure that you will not exceed the number of EC2 instances allowed by default in a given region (CloudFormation will create three EC2 instances). Ensure that you will not exceed number of VPCs allowed by default in a given region (CloudFormation will create one new VPC).
+c.	**AWS Limits** - Ensure that you will not exceed the number of EC2 instances allowed by default in a given region (CloudFormation will create three EC2 instances). Ensure that you will not exceed number of VPCs allowed by default in a given region (CloudFormation will create one new VPC).
 
 # Verify the Source Data Warehouse before Migration
 
@@ -35,7 +35,7 @@ For the purpose of this workshop, we have used an Amazon RDS for Oracle instance
 
 Once the CloudFormation Stack is created, an Amazon RDS instance will be provisioned along with the proper security group, DB instance type, storage type configuration and size as specified in the CloudFormation template.
 
-NOTE: To keep things simple for this lab, we have kept most of the configuration static in the CloudFormation template.
+**NOTE:** To keep things simple for this lab, we have kept most of the configuration static in the CloudFormation template.
 
 This Amazon RDS instance is pre-loaded with a sample schema (dms_sample). The sample schema mimics a simple sporting event ticketing application. The following diagram illustrates the data model we will be working in the lab.
 
