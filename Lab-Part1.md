@@ -5,7 +5,7 @@ In order to setup the infrastructure for this lab, we will be using an AWS Cloud
 The CloudFormation template for this lab is available in the directory - cloudformation.
 
 ### **Important:**
-**Note:** - This lab should be run in the Singapore region. Please make sure you select Singapore region : ap-southeast-1 **
+**Note:** - This lab should be run in the Singapore region. Please make sure you select Singapore region : **ap-southeast-1**
 
 The CloudFormation script can be launched only from Singapore region only and doesn't work on any other region.
 
@@ -34,9 +34,8 @@ The CloudFormation script can be launched only from Singapore region only and do
 <br/>
 
 5. On the Options page, put the following values for Tags and click Next.  All other values can remain as default.
-
-       > Key = Environment   
-       > Value = DWMigration2019
+  > Key = Environment   
+  > Value = DWMigration2019
 
  <br/>
 
@@ -54,7 +53,7 @@ The CloudFormation script can be launched only from Singapore region only and do
 
 9. Once CloudFormation has completed building the stack, the status will change to create_complete. Make sure to note the values for the following keys in the OUTPUTS tab. These will be needed as input for SCT and DMS setup.
 
-  | Output Field Name | Description |
+  > | Output Field Name | Description |
   | --- | --- |
   | Reinvent2018ANT371RedshiftEndpoint | End point for the Redshift cluster |
   | Reinvent2018ANT371VpcId | VPC ID of the newly created VPC |
