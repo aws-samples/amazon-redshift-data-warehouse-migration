@@ -49,6 +49,7 @@ The CloudFormation script can be launched only from Singapore region only and do
 <br/>
 
 8. At this point, you will be directed back to the CloudFormation console and will see a status of CREATE_IN_PROGRESS.  Do not continue until the status changes to CREATE_COMPLETE.
+<br/>
 
 9. Once CloudFormation has completed building the stack, the status will change to create_complete. Make sure to note the values for the following keys in the OUTPUTS tab. These will be needed as input for SCT and DMS setup.
 
