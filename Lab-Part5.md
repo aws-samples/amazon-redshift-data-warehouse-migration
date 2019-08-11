@@ -8,7 +8,7 @@ You will start with creating two IAM policies.  One which will allow SCT to list
 
   1.	Select IAM in the AWS Console. Select Policies and Create Policy.
 
-  2.	In the Create policy page, select JSON, and copy/paste the following policy.  Ensure to replace ** <<YOURBUCKETNAME>> ** with the S3 Bucket name created in CloudFormation.  Select Review Policy.
+  2.	In the Create policy page, select JSON, and copy/paste the following policy.  Ensure to replace **YOURBUCKETNAME** with the S3 Bucket name created in CloudFormation.  Select Review Policy.
 
   >
     ```
@@ -22,14 +22,14 @@ You will start with creating two IAM policies.  One which will allow SCT to list
                     "s3:ListBucket"
                 ],
                 "Resource": [
-                    "arn:aws:s3:::<<YOURBUCKETNAME>>"
+                    "arn:aws:s3:::YOURBUCKETNAME"
                 ]
             }
         ]
     }
 
     ```
-    
+
     <br/>
 
     >  ![EC2 Console](img/lab-5/lab5-image1.png)
