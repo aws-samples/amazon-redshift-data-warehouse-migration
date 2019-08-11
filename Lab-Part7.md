@@ -19,7 +19,7 @@ You have completed the workshop.  In this workshop you have created a simulated 
 
 Make sure you delete the Replication instance. Once the replication instance is deleted you should be able to delete the CloudFormation stack, which will in turn delete all resources.
 
-** Note: If you do not delete resources they will keep incurring charges. **
+**Note: If you do not delete resources they will keep incurring charges.**
 
 1.	Open the CloudFormation console at this [link](https://console.aws.amazon.com/cloudformation/home)
 
