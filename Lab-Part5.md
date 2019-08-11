@@ -27,7 +27,9 @@ You will start with creating two IAM policies.  One which will allow SCT to list
             }
         ]
     }
+
     ```
+    
     <br/>
 
     >  ![EC2 Console](img/lab-5/lab5-image1.png)
@@ -55,6 +57,7 @@ You will start with creating two IAM policies.  One which will allow SCT to list
           }
       ]
   }
+
   ```
 
   5.	In the Review Policy page, provide a policy name, such as ANT371ReadWriteBucket and select Create Policy.
