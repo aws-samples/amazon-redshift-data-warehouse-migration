@@ -2,7 +2,7 @@
 
 1. Now you should see Redshift on the right hand side. Click on the dms_sample_dw schema on the left hand side in the Oracle DW. You may see a message saying loading metadata. Once that is done your screen should look like below.
 
-  > ![EC2 Console](img/lab-3/lab3-image1.png)
+  >> ![EC2 Console](img/lab-3/lab3-image1.png)
 
 2. Right click on the dms_sample_dw schema in the left pane and click Create Report. This will create an assessement report.
 
