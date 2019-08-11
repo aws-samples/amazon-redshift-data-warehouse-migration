@@ -20,9 +20,11 @@
 
 <br/>
 3. Choose the Action Items tab. This tab will show all the items that need to be fixed before they can be migrated. E.g. data types that mismatch, objects not supported by Redshift like stored procedures, materialised views etc.
+
 <br/>
 
   > ![EC2 Console](img/lab-3/lab3-image4.png)
+
 <br/>
 
   >> Some of the few issues depending on the source schema, which our customers may encountered during the schema conversion .
@@ -47,9 +49,10 @@
    * You can choose from the following:
       * Use metadata, ignore statistical information
       * Ignore metadata, use statistical information
-      *	Use metadata and use statistical information  
+      *	Use metadata and use statistical information
+      <br/>
 
-  * After you choose your optimisation strategy, you can choose the rules you want to use and provide weights to each. You can choose from the following:
+  * <After you choose your optimisation strategy, you can choose the rules you want to use and provide weights to each. You can choose from the following:
       * Choose Distribution Key and Sort Keys using metadata
       * Choose fact table and appropriate dimension for collation
       * Analyse cardinality of indexes' columns
