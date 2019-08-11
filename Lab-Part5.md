@@ -10,7 +10,6 @@ You will start with creating two IAM policies.  One which will allow SCT to list
 
   2.	In the Create policy page, select JSON, and copy/paste the following policy.  Ensure to replace **YOURBUCKETNAME** with the S3 Bucket name created in CloudFormation.  Select Review Policy.
 
-  >
   ```
     {
         "Version": "2012-10-17",
@@ -28,8 +27,6 @@ You will start with creating two IAM policies.  One which will allow SCT to list
         ]
     }
     ```
-
-    <br/>
 
     ![EC2 Console](img/lab-5/lab5-image1.png)
 
