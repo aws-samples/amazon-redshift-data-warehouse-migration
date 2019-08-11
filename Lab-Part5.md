@@ -35,7 +35,7 @@ You will start with creating two IAM policies.  One which will allow SCT to list
 
   3.	In the Review Policy page, provide a policy name, such as ANT371ListBucket and select Create Policy.
 
-  4.	You will return to the IAM Policies page.  You need to create one more policy.  Select Create Policy, select the JSON tab, and use the following policy. Ensure to replace ** <<YOURBUCKETNAME>> ** with the S3 Bucket name created in CloudFormation.  Select Review Policy.
+  4.	You will return to the IAM Policies page.  You need to create one more policy.  Select Create Policy, select the JSON tab, and use the following policy. Ensure to replace **YOURBUCKETNAME** with the S3 Bucket name created in CloudFormation.  Select Review Policy.
 
   >
       ```
