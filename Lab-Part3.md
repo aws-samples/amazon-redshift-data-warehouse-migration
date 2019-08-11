@@ -21,11 +21,9 @@
 <br/>
 3. Choose the Action Items tab. This tab will show all the items that need to be fixed before they can be migrated. E.g. data types that mismatch, objects not supported by Redshift like stored procedures, materialised views etc.
 
-<br/>
+  <br/>
 
   > ![EC2 Console](img/lab-3/lab3-image4.png)
-
-<br/>
 
   >> Some of the few issues depending on the source schema, which our customers may encountered during the schema conversion .
 
@@ -40,7 +38,6 @@
 <br/>
 
 4. Open the context (right-click) menu for the dms_sample_dw item in the Schemas list in the Oracle DW pane on the left, and then choose Collect Statistics. AWS SCT analyzes the source data to recommend the best keys for the target Amazon Redshift database. For more information, see [Collecting or Uploading Statistics for the AWS Schema Conversion Tool](http://docs.aws.amazon.com/dms/latest/userguide/CHAP_SchemaConversionTool.DW.Statistics.html).  
-<br/>
 
   ![EC2 Console](img/lab-3/lab3-image5.png)
 
