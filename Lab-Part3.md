@@ -6,34 +6,33 @@
 
 2. Right click on the dms_sample_dw schema in the left pane and click Create Report. This will create an assessement report.
 
+  >  You will get a message saying that ‘Your Optimization Settings require run-time statitics information from the source database. Would you like to load statistics?’ Click Continue. This will take about 30-40 secs and your Database Migration Assessement Report will be ready.
 
-  You will get a message saying that ‘Your Optimization Settings require run-time statitics information from the source database. Would you like to load statistics?’ Click Continue. This will take about 30-40 secs and your Database Migration Assessement Report will be ready.
+  >  The AWS SCT creates a database migration assessment report to help you convert your schema. The database migration assessment report provides important information about the conversion of the schema from your source database to your target database instance. The report summarizes all of the schema conversion tasks and details the action items for schema that can't be converted to the DB engine of your target DB instance. The report also includes estimates of the amount of effort that it will take to write the equivalent code in your target DB instance that can't be converted automatically.
 
-  The AWS SCT creates a database migration assessment report to help you convert your schema. The database migration assessment report provides important information about the conversion of the schema from your source database to your target database instance. The report summarizes all of the schema conversion tasks and details the action items for schema that can't be converted to the DB engine of your target DB instance. The report also includes estimates of the amount of effort that it will take to write the equivalent code in your target DB instance that can't be converted automatically.
-
-  ![EC2 Console](img/lab-3/lab3-image2.png)
+  >  ![EC2 Console](img/lab-3/lab3-image2.png)
   <br/>
 
-  ![EC2 Console](img/lab-3/lab3-image3.png)
+  >  ![EC2 Console](img/lab-3/lab3-image3.png)
 
 3. Choose the Action Items tab. This tab will show all the items that need to be fixed before they can be migrated. E.g. data types that mismatch, objects not supported by Redshift like stored procedures, materialised views etc.
 
-  ![EC2 Console](img/lab-3/lab3-image4.png)
+  >  ![EC2 Console](img/lab-3/lab3-image4.png)
 
-  Some of the few issues depending on the source schema, which our customers may encountered during the schema conversion .
+  > Some of the few issues depending on the source schema, which our customers may encountered during the schema conversion .
 
-  **Unable to convert datatypes** – This is for an CLOB datatype which is converted to VARCHAR. For a list of target data types see [here](http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Reference.Target.Redshift.DataTypes.html). SCT also specifies using S3 as storage for this datatype.
+  > **Unable to convert datatypes** – This is for an CLOB datatype which is converted to VARCHAR. For a list of target data types see [here](http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Reference.Target.Redshift.DataTypes.html). SCT also specifies using S3 as storage for this datatype.
 
-  **Amazon redshift supports stored procedures** – The existing stored procedure  will need to be manually converted or rewritten per Amazon Redshift standards.
+  > **Amazon redshift supports stored procedures** – The existing stored procedure  will need to be manually converted or rewritten per Amazon Redshift standards.
 
-  **Amazon Redshift doesn’t support sequences**  – This will need to be manually converted. All the materialised views need to be converted to tables in Redshift and data loading scripts need to be defined separately to populate them.
+  > **Amazon Redshift doesn’t support sequences**  – This will need to be manually converted. All the materialised views need to be converted to tables in Redshift and data loading scripts need to be defined separately to populate them.
 
-  In a real life scenario you will need to work through these issues and resolve them before moving on.
+  > In a real life scenario you will need to work through these issues and resolve them before moving on.
 
 
 4. Open the context (right-click) menu for the dms_sample_dw item in the Schemas list in the Oracle DW pane on the left, and then choose Collect Statistics. AWS SCT analyzes the source data to recommend the best keys for the target Amazon Redshift database. For more information, see [Collecting or Uploading Statistics for the AWS Schema Conversion Tool](http://docs.aws.amazon.com/dms/latest/userguide/CHAP_SchemaConversionTool.DW.Statistics.html).  
 
-  ![EC2 Console](img/lab-3/lab3-image5.png)
+  > ![EC2 Console](img/lab-3/lab3-image5.png)
 
 5. To optimise how the AWS Schema Conversion Tool (AWS SCT) converts your data warehouse schema, you can choose the strategies and rules you want the tool to use. After converting your schema, and reviewing the suggested keys, you can adjust your rules or change your strategy to get the results you want. Choose Settings, and then choose Project Settings. The Current project settings dialog box appears. In the left pane, choose optimisation Strategies. The optimisation strategies appear in the right pane with the defaults selected. For optimisation Strategies, choose the optimisation strategy you want to use.
 
