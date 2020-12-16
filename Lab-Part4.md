@@ -15,9 +15,9 @@
  >
   Name | OracleDW
   ---- | ----
-  Driver | Choose the Oracle driver which is installed on your EC2 instance. You can specify the drivers path by clicking on Manage Drivers and pointing the path to C:\Users\Administrator\Desktop\ANT371\OracleDrivers\ojdbc7.jar .
+  Driver | Choose the Oracle driver which is installed on your EC2 instance. You can specify the drivers path by clicking on Manage Drivers and pointing the path to C:\Users\Administrator\Desktop\drivers\ojdbc8.jar .
   URL | Jdbc url as follows - jdbc:oracle:thin:@OracleEndpoint:1521:DMSDW Get the Reinvent2018ANT371OracleEndpoint from step 8
-  User name | dms_sample_dw
+  User name | dms_sample
   Password | Refer to the Cloud Formation output for the database password
 
   Check AutoCommit and click OK. OracleDW will connect to the Source Oracle database.
@@ -28,7 +28,7 @@
   >
   Name | RedshiftDW
   ---- | ----
-  Driver | Choose the Redshift driver which is installed on your EC2 instance. You can specify the drivers path by clicking on Manage Drivers Drivers and pointing the path to C:\Users\Administrator\Desktop\ANT371\RedshiftDrivers\ RedshiftJDBC42-1.2.16.1027.jar .
+  Driver | Choose the Redshift driver which is installed on your EC2 instance. You can specify the drivers path by clicking on Manage Drivers Drivers and pointing the path to C:\Users\Administrator\Desktop\drivers\RedshiftJDBC42-1.2.43.1067.jar .
   URL | Jdbc url can be found on Redshift cluster page on the AWS Management Console. Its format is as follows: jdbc:redshift://Redshift Endpoint:5439/dmsdwtarget
   User name | dms_sample_dw
   Password | Refer to the Cloud Formation output for the database password
