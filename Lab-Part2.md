@@ -18,7 +18,7 @@ Now that the environment has been built, the next step is to connect to the EC2 
 
 ## Install AWS schema Conversion Tool and verify connectivity to Oracle RDS and Amazon Redshift from AWS SCT
 
-1.	Once connected launch SCT installation msi from the ANT371 folder on the desktop of the EC2 instance. You will find it under the ANT371 folder as ‘AWS Schema Conversion Tool-1.0.619.msi’. Double click it to launch Schema Conversion Tool installation.
+1.	Once connected launch SCT installation msi from the `aws-schema-conversion-tool-1.0.latest` folder on the desktop of the EC2 instance. You will find it under the ANT371 folder as ``AWS Schema Conversion Tool-1.0.645``. Double click it to launch Schema Conversion Tool installation.
 
 2. After clicking AWS Schema Conversion Tool, wait for a minute for the tool to launch, hit Run and install AWS Schema Conversion Tool. Once installed, be aware there will be no confirmation message of the installation. Click on Windows Start button, and click on Down Arrow to list Apps, drag the bar to the right until you see AWS Schema Conversion Tool as seen below:
 
