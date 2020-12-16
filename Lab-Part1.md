@@ -5,9 +5,9 @@ In order to setup the infrastructure for this lab, we will be using an AWS Cloud
 The CloudFormation template for this lab is available in the directory - cloudformation.
 
 ### **Important:**
-**Note:** - This lab should be run in the Singapore region. Please make sure you select Singapore region : **ap-southeast-1**
+**Note:** - This lab should be run in the N. Virginia region. Please make sure you select Singapore region : **us-east-1**
 
-The CloudFormation script can be launched only from Singapore region only and doesn't work on any other region.
+The CloudFormation script can be launched only from N. Virginia region only and doesn't work on any other region.
 
 ## Creating the stack using the CloudFormation template
 
@@ -29,7 +29,7 @@ The CloudFormation script can be launched only from Singapore region only and do
 
       > **Stack Name:**	Any name you would like to give the stack. but recommended name to be unique like DWMigration2019. Please append your initials if multiple people are running the lab in the same account.      
 
-      > **KeyName:**	Select a key in Singapore region from the dropdown. If you created a key in step 1 then select that key or else select another key already existing in your account.  
+      > **KeyName:**	Select a key in N. Virginia region from the dropdown. If you created a key in step 1 then select that key or else select another key already existing in your account.  
 
 <br/>
 
