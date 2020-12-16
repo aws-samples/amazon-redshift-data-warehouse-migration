@@ -1,4 +1,4 @@
-Last Updated - Nov-2020
+Last Updated - Dec -2020
 
 ## Data Warehouse Migration to Amazon Redshift
 
