@@ -18,7 +18,7 @@ Now that the environment has been built, the next step is to connect to the EC2 
 
 ## Install AWS schema Conversion Tool and verify connectivity to Oracle RDS and Amazon Redshift from AWS SCT
 
-1.	Once connected launch SCT installation msi from the `aws-schema-conversion-tool-1.0.latest` folder on the desktop of the EC2 instance. You will find it under the ANT371 folder as ``AWS Schema Conversion Tool-1.0.645``. Double click it to launch Schema Conversion Tool installation.
+1.	Once connected launch SCT installation msi from the `aws-schema-conversion-tool-1.0.latest` folder on the desktop of the EC2 instance. You will find it under the `aws-schema-conversion-tool-1.0.latest` folder as ``AWS Schema Conversion Tool-1.0.645``. Double click it to launch Schema Conversion Tool installation.
 
 2. After clicking AWS Schema Conversion Tool, wait for a minute for the tool to launch, hit Run and install AWS Schema Conversion Tool. Once installed, be aware there will be no confirmation message of the installation. Click on Windows Start button, and click on Down Arrow to list Apps, drag the bar to the right until you see AWS Schema Conversion Tool as seen below:
 
@@ -39,9 +39,9 @@ Now that the environment has been built, the next step is to connect to the EC2 
   Server name | Take this from the output of the CloudFormation template in Step 8. It is the Reinvent2018ANT371OracleEndpoint output field.
   Server port | 1521
   Oracle SID | DMSDW
-  User name | dms_sample_dw
-  Password | <Refer to the Cloud Formation output for the database password>
-  Oracle Driver Path | Specify the Oracle driver path as C:\Users\Administrator\Desktop\ANT371\OracleDrivers\ojdbc7.jar
+  User name | dms_user
+  Password | dms_user
+  Oracle Driver Path | Specify the Oracle driver path as C:\Users\Administrator\Desktop\ANT371\OracleDrivers\ojdbc8.jar
 
   > ![EC2 Console](img/lab-2/lab2-image7.png)
 
@@ -55,7 +55,7 @@ Now that the environment has been built, the next step is to connect to the EC2 
   ---- | ----
   Server name | Take this from the output of the CloudFormation template in Step 8. It is the Reinvent2018-ANT371-Redshift-Endpoint output field.
   Server port | 5439
-  Database | dmsdwtarget
+  Database | dwtarget
   User name | dms_sample_dw
   Password | <Refer to the Cloud Formation output for the database password>
   Amazon Redshift Driver Path | C:\Users\Administrator\Desktop\ANT371\RedshiftDrivers\RedshiftJDBC42-1.2.16.1027.jar
